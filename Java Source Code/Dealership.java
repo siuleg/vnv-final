@@ -31,7 +31,7 @@ public class Dealership {
 	public Dealership(BrandSet brandSet, VendorSet vendorsSet, CarSet stockCars) {
 		// Here you need to add the code for the constructor.
     if (brandSet == null || vendorsSet == null || stockCars.size < 5) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Invalid arguments for Dealership constructor.");
     }
 		this.brands = brandSet;
 		this.vendors = vendorsSet;
@@ -48,11 +48,11 @@ public class Dealership {
 	  @*/
 	public void sell(Car c, Vendor v) {
 		//Add here the code for method "sell".
-		if (!stock.size >= 6) {
-			return;
+		if (stock.size < 6) {
+			throw new IllegalArgumentException("Invalid stock size.");
 		}
 		if (!stock.contains(c)) {
-			return;
+			throw new IllegalArgumentException("Car not in stock.");
 		}		
 
 		SinglyLinkedListCarNode prev = null;
@@ -80,7 +80,7 @@ public class Dealership {
 		//Unlike "sell", CarSet provides a method for adding
 		//a car to a CarSet.
 		if (stock.contains(c)) {
-			return;
+			throw new IllegalArgumentException("Car already in stock.");
 		}
 		stock.insertBack(c);
 	}

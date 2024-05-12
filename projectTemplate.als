@@ -39,30 +39,41 @@ fact allCarsInSoldBrands {
 
 fact allCarsInStockNotSold {
 	//This fact accounts for the rule "If a car is in stock, then it can not appear as having been sold"
-	all c: Car | no d: Dealership | c in d.stock and c not in d.sold.Person
+	all d: Dealership, c: Car, v: Person | c in d.stock implies c not in d.sold[v]
 }
 
 pred preconditionForSell[d : Dealership, c : Car, v : Person]{
 	//This predicate leaves space in case some preconditions are
 	//required for method "sell".
+	c in d.stock and v in d.vendors
 }
 
 pred sell[d, d_1 : Dealership, c : Car, v : d.vendors]{
 	//This predicate describes the action of selling a car.
 	//Parameter d represents the initial state.
 	//Parameter d' represents the new (final) state obtained after executing the action.
+	preconditionForSell[d, c, v]
+    d_1.vendors = d.vendors
+    d_1.brands = d.brands
+    d_1.stock = d.stock - c
+    d_1.sold = d.sold + (v -> c)
 }
 
 
 pred preconditionForBuy[d : Dealership, c : Car]{
 	//This predicate leaves space in case some preconditions are
 	//required for action "buy".
+    c.brand in d.brands
 }
 
 pred buy[d, d_1 : Dealership, c : Car]{
 	//This predicate describes the action of buying a car.
 	//Parameter d represents the initial state.
 	//Parameter d' represents the new (final) state obtained after executing the action.
+	d_1.vendors = d.vendors
+    d_1.brands = d.brands
+    d_1.stock = d.stock + c
+    d_1.sold = d.sold
 }
 
 
