@@ -30,6 +30,10 @@ public class Dealership {
 	//@ signals (AssertionError) false;
 	public Dealership(BrandSet brandSet, VendorSet vendorsSet, CarSet stockCars) {
 		// Here you need to add the code for the constructor.
+		this.brands = brandSet;
+		this.vendors = vendorsSet;
+		this.stock = stockCars;
+		this.sold = new CarVendorMap();
 	}
 
 
@@ -41,6 +45,27 @@ public class Dealership {
 	  @*/
 	public void sell(Car c, Vendor v) {
 		//Add here the code for method "sell".
+		if (!stock.size >= 6) {
+			return;
+		}
+		if (!stock.contains(c)) {
+			return;
+		}		
+
+		SinglyLinkedListCarNode prev = null;
+		SinglyLinkedListCarNode current = stock.header;
+		while (current != null && current.value != c) {
+			prev = current;
+			current = current.next;
+		}
+		if (current != null) {
+			if (prev == null) {
+				stock.header = current.next;
+			} else {
+				prev.next = current.next;
+			}
+			stock.size--;
+		}
 	}
 
 
@@ -51,6 +76,10 @@ public class Dealership {
 		//Add here the code for method "buy".
 		//Unlike "sell", CarSet provides a method for adding
 		//a car to a CarSet.
+		if (stock.contains(c)) {
+			return;
+		}
+		stock.insertBack(c);
 	}
 
 }
