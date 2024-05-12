@@ -30,6 +30,9 @@ public class Dealership {
 	//@ signals (AssertionError) false;
 	public Dealership(BrandSet brandSet, VendorSet vendorsSet, CarSet stockCars) {
 		// Here you need to add the code for the constructor.
+    if (brandSet == null || vendorsSet == null || stockCars.size < 5) {
+      throw new IllegalArgumentException();
+    }
 		this.brands = brandSet;
 		this.vendors = vendorsSet;
 		this.stock = stockCars;
