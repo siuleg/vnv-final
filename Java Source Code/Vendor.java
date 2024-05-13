@@ -1,5 +1,3 @@
-package utep.VandV;
-
 public class Vendor {
 	
 	int id;

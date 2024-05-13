@@ -1,6 +1,4 @@
-package utep.VandV;
-
-import utep.VandV.SinglyLinkedListCarNode;
+import SinglyLinkedListCarNode;
 
 public class CarSet {
 

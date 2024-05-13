@@ -1,6 +1,4 @@
-package utep.VandV;
-
-import utep.VandV.SinglyLinkedListCarVendor;
+import SinglyLinkedListCarVendor;
 
 public class CarVendorMap {
 

@@ -76,8 +76,48 @@ pred buy[d, d_1 : Dealership, c : Car]{
     d_1.sold = d.sold
 }
 
+// Assertions to test the model
 
-run { 
-//Add here the property that you want to check in order
-//to test your model.
+assert InvariantBrandsAndVendors {
+    all d, d_1: Dealership, c: Car, v: Person |
+        sell[d, d_1, c, v] or buy[d, d_1, c] implies
+        (d.vendors = d_1.vendors and d.brands = d_1.brands)
+}
+
+assert StockConsistency {
+    all d, d_1: Dealership, c: Car, v: Person |
+        (sell[d, d_1, c, v] or buy[d, d_1, c]) implies
+        (all c_1: Car | (c_1 in d.stock and c_1 != c) implies c_1 in d_1.stock) and
+        (all c_1: Car | (c_1 in d_1.stock and c_1 != c) implies c_1 in d.stock)
+}
+
+
+assert SoldCarsBelongToBrands {
+    all d, d_1: Dealership, c: Car, v: Person |
+    sell[d, d_1, c, v] implies c.brand in d_1.brands
+}
+
+assert CarNotInStockWhenSold {
+    all d, d_1: Dealership, c: Car, v: Person |
+        sell[d, d_1, c, v] implies c not in d_1.stock
+}
+
+// Run commands to check the assertions
+
+check InvariantBrandsAndVendors for 10 but 4 int
+check StockConsistency for 10 but 4 int
+check SoldCarsBelongToBrands for 10 but 4 int
+check CarNotInStockWhenSold for 10 but 4 int
+
+
+run {
+    some d: Dealership, c: Car, d_1: Dealership |
+        buy[d, d_1, c]
 } for 10 but 4 int
+
+run {
+    some d: Dealership, c: Car, v: Person, d_1: Dealership |
+        sell[d, d_1, c, v]
+} for 10 but 4 int
+
+run {} for 10 but 4 int

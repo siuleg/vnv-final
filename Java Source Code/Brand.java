@@ -1,4 +1,3 @@
-package utep.VandV;
 
 public class Brand {
 	

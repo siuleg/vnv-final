@@ -1,7 +1,3 @@
-package utep.VandV;
-
-
-
 public class Car {
 	
 	/*@ nullable @*/ Brand brand;

@@ -1,8 +1,6 @@
-package utep.VandV;
-
-import utep.VandV.BrandSet;
-import utep.VandV.VendorSet;
-import utep.VandV.CarVendorMap;
+import BrandSet;
+import VendorSet;
+import CarVendorMap;
 
 public class Dealership {
 

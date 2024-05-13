@@ -1,6 +1,4 @@
-package utep.VandV;
-
-import utep.VandV.SinglyLinkedListVendorNode;
+import SinglyLinkedListVendorNode;
 
 public class VendorSet {
 

@@ -1,6 +1,4 @@
-package utep.VandV;
-
-import utep.VandV.SinglyLinkedListBrandNode;
+import SinglyLinkedListBrandNode;
 
 public class BrandSet {
 

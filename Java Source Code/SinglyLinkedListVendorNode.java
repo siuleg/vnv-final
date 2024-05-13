@@ -1,5 +1,3 @@
-package utep.VandV;
-
 /*@nullable_by_default@*/
 public class SinglyLinkedListVendorNode {
 
